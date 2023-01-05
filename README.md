@@ -1,3 +1,13 @@
+
+
+#Electrika 
+This is  an online electronics shopping cart ,
+#Tech stack
+-Next Js 
+-Prisma 
+-MongoDb 
+-tRPC 
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
