@@ -1,8 +1,8 @@
 
 
-#Electrika 
+# Electrika 
 This is  an online electronics shopping cart ,
-#Tech stack
+# Tech stack
 -Next Js 
 -Prisma 
 -MongoDb 
