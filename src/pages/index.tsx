@@ -1,4 +1,11 @@
-import { ActionIcon, Indicator, Paper, Text, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Autocomplete,
+  Indicator,
+  Paper,
+  Text,
+  TextInput,
+} from "@mantine/core";
 
 import { useSnapshot } from "valtio";
 import { GlobalStore } from "../../store";
@@ -12,22 +19,30 @@ import Link from "next/link";
 const Shop = () => {
   const globalStoreSnapshot = useSnapshot(GlobalStore);
   const { data: electronics } = api.electronics.getElectronics.useQuery();
-
+  function data() {
+    const searchItems: string[] = [];
+    electronics?.forEach((el) => searchItems.push(el.deviceName));
+    return searchItems;
+  }
   return (
     <div>
-      <Paper className="header container sticky top-0 z-50 mx-auto  mt-1 flex items-center justify-between p-2">
+      <Paper
+        bg="dark"
+        className="header container fixed top-0 z-50 mx-auto  flex items-center justify-between p-2 pt-1"
+      >
         <Text className=" text-xs font-bold" color="blue">
           ELECTRIKA
         </Text>
-        <TextInput
+        <Autocomplete
           placeholder="eg. Smartphone"
           icon={<Icon icon={sharpSearch} />}
           radius="xl"
+          data={data()}
         />
         <Link href="/cart">
           <Indicator label={globalStoreSnapshot.electronicsInCart.length}>
-            <ActionIcon color="">
-              <Icon icon={baselineShoppingCart} />
+            <ActionIcon color="teal">
+              <Icon className=" text-4xl" icon={baselineShoppingCart} />
             </ActionIcon>
           </Indicator>
         </Link>

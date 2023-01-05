@@ -7,6 +7,7 @@ import baselineAddShoppingCart from "@iconify/icons-ic/baseline-add-shopping-car
 import { Icon } from "@iconify/react";
 import { useSnapshot } from "valtio";
 import { GlobalStore } from "../../store";
+import { showNotification } from "@mantine/notifications";
 
 interface Props {
   id: string;
@@ -34,6 +35,12 @@ const ElectronicCard = ({
       stocked,
       quantity: 1,
     });
+    showNotification({
+      title: `${deviceName} added to your  cart `,
+      message: " proceed to checkout !",
+      color: "teal",
+      autoClose: 2000,
+    });
     console.log("cart", globalStoreSnapshot.electronicsInCart);
   }
   return (
@@ -58,6 +65,9 @@ const ElectronicCard = ({
         </Card.Section>
         <Card.Section className=" actions flex w-64 items-center  justify-around p-2    ">
           <Button
+            disabled={globalStoreSnapshot.electronicsInCart.some(
+              (itemIncart) => itemIncart.id === id
+            )}
             onClick={addItemToCart}
             leftIcon={<Icon icon={baselineAddShoppingCart} />}
             className="  grow"
